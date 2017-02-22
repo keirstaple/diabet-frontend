@@ -1,3 +1,16 @@
+## Project Introduction
+This project is the front-end rebuild of [Diabet.io](http://www.diabet.io/).
+
+This project is meant to help individuals better manage their diabetes through integrating data and journal entries.
+
+To take a look at the code and get started, run the following in your Terminal:
+* `git clone https://github.com/keirstaple/diabet-frontend.git`
+* `cd diabetIo`
+* `npm install`
+* `npm start`
+
+## Create-React-App Introduction
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
