@@ -14,7 +14,6 @@ class NewMeasurement extends Component {
     return (
       <div id="new-measurement">
         <h1>Register a New Measurement</h1>
-        <hr></hr>
         <p>Enter a new measurement. It will be stored on our insecure cloud server. You can retreive it from anywhere in the world.</p>
         <label>Measurement</label>
         <input
