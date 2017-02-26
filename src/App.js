@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
+import NewMeasurement from './NewMeasurement';
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Hello world</h1>
+        <NewMeasurement />
       </div>
     );
   }
