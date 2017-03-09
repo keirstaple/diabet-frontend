@@ -19,7 +19,8 @@ class NewMeasurement extends Component {
   }
 
   renderMeasurements() {
-    return this.props.measurements.map((datum) => {
+    console.log('props: ', this.props);
+    return this.props.measurements.results.map((datum) => {
       return (
         <li className="list-group-item" key={Math.random()}>
           {datum.notes}
@@ -28,37 +29,37 @@ class NewMeasurement extends Component {
     });
   }
 
-  // onSubmit(props) {
-  //   this.props.createPost(props)
-  //     .then(() => {
-  //       // blog post has been created, navigate the user to the index
-  //       // We navigate by calling this.context.router.push with the
-  //       // new path to navigate to.
-  //       this.context.router.push('/');
-  //     });
-  // }
-
   render() {
-    //same as const handleSubmit = this.props.handleSubmit;
-    //same as const title = this.props.fields.title;
-    // const { fields: { title, categories, content }, handleSubmit } = this.props;
-
     return (
       <div id="new-measurement">
         <ul className="list-group">
-          {this.renderMeasurements()}
+          { this.renderMeasurements() }
         </ul>
       </div>
     );
   }
-
 }
 
 function mapStateToProps(state) {
+  console.log('state: ', state);
   return { measurements: state.measurements.all };
 }
 
 export default connect(mapStateToProps, { fetchMeasurements })(NewMeasurement);
+
+//same as const handleSubmit = this.props.handleSubmit;
+//same as const title = this.props.fields.title;
+// const { fields: { title, categories, content }, handleSubmit } = this.props;
+
+// onSubmit(props) {
+//   this.props.createPost(props)
+//     .then(() => {
+//       // blog post has been created, navigate the user to the index
+//       // We navigate by calling this.context.router.push with the
+//       // new path to navigate to.
+//       this.context.router.push('/');
+//     });
+// }
 
 // function validate(values) {
 //   const errors = {};

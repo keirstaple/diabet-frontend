@@ -1,21 +1,23 @@
 import axios from 'axios';
 require('dotenv').config()
 
-const username = process.env.REACT_APP_USERNAME;
-const password = process.env.REACT_APP_PASSWORD;
+// const username = process.env.REACT_APP_USERNAME;
+// const password = process.env.REACT_APP_PASSWORD;
+// const token = process.env.REACT_APP_CRSF_TOKEN;
+const authorization = process.env.REACT_APP_AUTHORIZATION;
 
 export const FETCH_MEASUREMENTS = 'FETCH_MEASUREMENTS';
 export const CREATE_MEASUREMENTS = 'CREATE_MEASUREMENTS';
 
 const ROOT_URL = `https://www.diabet.io/api/glucose/`;
 const settings = {
-  responseType: 'json',
-  withCredentials: true,
-  headers: {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://www.diabet.io/api/glucose/",
+  "headers": {
     "content-type": "application/json",
-    "authorization": "Basic a2VpcjpicmVha2FoYWJpdA==",
-    "cache-control": "no-cache",
-    "postman-token": "855c79a5-d54d-b200-0266-20cdc5b085ee"
+    "authorization": `Basic ${authorization}`,
+    "cache-control": "no-cache"
   },
 }
 
