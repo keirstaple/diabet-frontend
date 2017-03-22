@@ -1,9 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import './App.scss';
+import { browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import configureStore from './store';
+import { Root } from './views';
+import getRoutes from './routes.js';
+
+const store = configureStore({}, browserHistory);
+const history = syncHistoryWithStore(browserHistory, store);
+const routes = getRoutes(history);
 
 ReactDOM.render(
-  <App />,
+  <Root store={store} history={history} routes={routes} />,
   document.getElementById('root')
 );
