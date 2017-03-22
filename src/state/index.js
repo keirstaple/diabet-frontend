@@ -1,8 +1,9 @@
 import { initializeApp, getMeasurementsThunk } from './reducers/app';
-import { measurementsData } from './selectors';
+import { measurementsData, measurementsResults } from './selectors';
 
 export {
   initializeApp,
   getMeasurementsThunk,
-  measurementsData
+  measurementsData,
+  measurementsResults
 };

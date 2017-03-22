@@ -5,7 +5,12 @@ export const routeState = state => state.routing;
 
 export const measurementsData = createSelector(
   appState,
-  ({ measurements }) => measurements.data
+  ({ measurements }) => measurements
+)
+
+export const measurementsResults = createSelector(
+  measurementsData,
+  ({ results }) => results
 )
 
 export const locationBeforeTransitions = createSelector(

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 // import { reduxForm } from 'redux-form';
 // import { createPost } from '../actions/index';
 import { connect } from 'react-redux';
-import { getMeasurementsThunk, measurementsData } from './../../state';
+import { getMeasurementsThunk, measurementsData, measurementsResults } from './../../state';
 // import { Link } from 'react-router';
 
 class NewMeasurement extends Component {
@@ -42,7 +42,7 @@ class NewMeasurement extends Component {
 
 export default connect(
   (state) => ({
-    measurements: measurementsData(state)
+    measurements: measurementsResults(state)
   }),
   dispatch => ({
     getMeasurements: () => dispatch(getMeasurementsThunk())
