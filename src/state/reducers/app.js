@@ -13,8 +13,8 @@ export const initializeApp = () => ({ type: INIT_APP });
 
 //diabet actions
 export const getMeasurements = payload => ({ type: GET_MEASUREMENTS, payload });
-export const getMeasurementsSuccess = payload => ({ type: FETCH_VIMEO_DATA_SUCCESS, payload });
-export const getMeasurementsFailure = error => ({ type: FETCH_VIMEO_DATA_FAILURE, error });
+export const getMeasurementsSuccess = payload => ({ type: GET_MEASUREMENTS_SUCCESS, payload });
+export const getMeasurementsFailure = error => ({ type: GET_MEASUREMENTS_FAILURE, error });
 
 //thunks
 export const getMeasurementsThunk = () => dispatch => {

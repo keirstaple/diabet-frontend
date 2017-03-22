@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import NavBar from './NavBar';
+import NewMeasurement from './NewMeasurement';
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
       <div>
+        <NavBar />
+        <NewMeasurement />
         {this.props.children}
       </div>
     );
   }
 }
+
+export default App;

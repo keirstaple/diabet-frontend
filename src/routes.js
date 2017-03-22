@@ -1,13 +1,11 @@
 import React from 'react';
-import { Route, Router, IndexRoute } from 'react-router';
+import { Route, Router } from 'react-router';
 
-import { App, NewMeasurement } from './views';
+import { App } from './views';
 
 const routes = (history) => (
   <Router history={history}>
-    <Route path="/" component={App}>
-      <IndexRoute component={NewMeasurement} />
-    </Route>
+    <Route path="/" component={App} />
   </Router>
 );
 

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 // import { reduxForm } from 'redux-form';
 // import { createPost } from '../actions/index';
 import { connect } from 'react-redux';
-import { fetchMeasurements } from '../actions/index';
+import { getMeasurementsThunk, measurementsData } from './../../state';
 // import { Link } from 'react-router';
 
 class NewMeasurement extends Component {
@@ -15,18 +15,18 @@ class NewMeasurement extends Component {
 
   componentWillMount() {
     //grabs posts when component loads
-    this.props.fetchMeasurements();
+    this.props.getMeasurements();
   }
 
   renderMeasurements() {
     console.log('props: ', this.props);
-    return this.props.measurements.results.map((datum) => {
-      return (
-        <li className="list-group-item" key={Math.random()}>
-          {datum.notes}
-        </li>
-      );
-    });
+    if(this.props.measurements) {
+      return this.props.measurements.map((datum, idx) => {
+        return (
+          <li className="list-group-item" key={idx}>{datum.notes}</li>
+        );
+      });
+    }
   }
 
   render() {
@@ -40,12 +40,14 @@ class NewMeasurement extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  console.log('state: ', state);
-  return { measurements: state.measurements.all };
-}
-
-export default connect(mapStateToProps, { fetchMeasurements })(NewMeasurement);
+export default connect(
+  (state) => ({
+    measurements: measurementsData(state)
+  }),
+  dispatch => ({
+    getMeasurements: () => dispatch(getMeasurementsThunk())
+  })
+)(NewMeasurement);
 
 //same as const handleSubmit = this.props.handleSubmit;
 //same as const title = this.props.fields.title;

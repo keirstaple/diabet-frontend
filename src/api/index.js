@@ -1,5 +1,4 @@
 import promiseToGet from './utils';
-
 require('dotenv').config()
 
 const ROOT_URL = `https://www.diabet.io/api/glucose/`;
