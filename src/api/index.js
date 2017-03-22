@@ -1,9 +1,6 @@
 import axios from 'axios';
 require('dotenv').config()
 
-// const username = process.env.REACT_APP_USERNAME;
-// const password = process.env.REACT_APP_PASSWORD;
-// const token = process.env.REACT_APP_CRSF_TOKEN;
 const authorization = process.env.REACT_APP_AUTHORIZATION;
 
 export const FETCH_MEASUREMENTS = 'FETCH_MEASUREMENTS';
