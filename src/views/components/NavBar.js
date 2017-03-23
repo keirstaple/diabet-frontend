@@ -6,6 +6,7 @@ class NavBar extends Component {
     return(
       <div>
         <h2><Link to={'/'}>New Measurement</Link></h2>
+        <h2><Link to={'/overview'}>Overview</Link></h2>
       </div>
     );
   }

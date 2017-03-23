@@ -1,13 +1,20 @@
 import {promiseToGet} from './utils';
 require('dotenv').config()
 
-const ROOT_URL = `https://www.diabet.io/api/glucose/`;
+const ROOT_URL = 'https://www.diabet.io/api/glucose/';
+const ROOT_URL_MINI = `https://www.diabet.io/api/glucose/mini/?start=`;
 const authorization = process.env.REACT_APP_AUTHORIZATION;
 
-export const getMeasurements = () => {
+export const getMeasurements = (startDate, startTime, endDate, endTime) => {
   console.log('inside getMeasurements');
-
-  const url = `${ROOT_URL}`;
+  let url;
+  if(startDate === undefined || endDate === undefined) {
+    url = `${ROOT_URL}`;
+    console.log(url);
+  } else {
+    url = `${ROOT_URL_MINI}${startDate}-${startTime}&end=${endDate}-${endTime}`;
+    console.log(url);
+  }
   const init = {
     "async": true,
     "crossDomain": true,
