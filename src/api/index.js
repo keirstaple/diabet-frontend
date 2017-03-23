@@ -10,10 +10,10 @@ export const getMeasurements = (startDate, startTime, endDate, endTime) => {
   let url;
   if(startDate === undefined || endDate === undefined) {
     url = `${ROOT_URL}`;
-    console.log(url);
+    console.log('api call', url);
   } else {
     url = `${ROOT_URL_MINI}${startDate}-${startTime}&end=${endDate}-${endTime}`;
-    console.log(url);
+    console.log('api call', url);
   }
   const init = {
     "async": true,
