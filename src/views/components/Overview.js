@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { NavBar, OverviewInput } from '../';
-import { getMeasurementsThunk, measurementsData, measurementsResults } from './../../state';
+import { getMeasurementsThunk, measurementsResults } from './../../state';
 
 class Overview extends Component {
   //context doesn't have to be deliberately passed from parent to child like props

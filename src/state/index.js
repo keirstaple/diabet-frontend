@@ -1,9 +1,10 @@
 import { initializeApp, getMeasurementsThunk } from './reducers/app';
-import { measurementsData, measurementsResults } from './selectors';
+import { measurementsData, measurementsResults, overviewInputFormValues } from './selectors';
 
 export {
   initializeApp,
   getMeasurementsThunk,
   measurementsData,
-  measurementsResults
+  measurementsResults,
+  overviewInputFormValues
 };

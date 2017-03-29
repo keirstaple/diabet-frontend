@@ -5,8 +5,9 @@ const ROOT_URL = 'https://www.diabet.io/api/glucose/';
 const ROOT_URL_MINI = `https://www.diabet.io/api/glucose/mini/?start=`;
 const authorization = process.env.REACT_APP_AUTHORIZATION;
 
-export const getMeasurements = (startDate, startTime, endDate, endTime) => {
+export const getMeasurements = (inputs = {}) => {
   console.log('inside getMeasurements');
+  const { startDate, startTime, endDate, endTime} = inputs;
   let url;
   if(startDate === undefined || endDate === undefined) {
     url = `${ROOT_URL}`;

@@ -1,5 +1,7 @@
-import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { getMeasurementsThunk } from './../../state';
 
 const validate = values => {
   const errors = {}
@@ -34,24 +36,67 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
   </div>
 )
 
-const OverviewInput = (props) => {
-  const { handleSubmit, pristine, reset, submitting } = props
-  return (
-    <form onSubmit={handleSubmit}>
-      <Field name="startDate" type="date" component={renderField} label="Start Date" />
-      <Field name="startTime" type="time" component={renderField} label="Start Time" />
-      <Field name="endDate" type="date" component={renderField} label="End Date" />
-      <Field name="endTime" type="time" component={renderField} label="End Time" />
-      <div>
-        <button type="submit" disabled={submitting}>Submit</button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-      </div>
-    </form>
-  )
+class OverviewInput extends Component {
+  onSubmit() {
+    // console.log('props', this.props.formValues)
+    const { startDate, startTime, endDate, endTime } = this.props;
+    const inputs = {
+      startDate,
+      startTime,
+      endDate,
+      endTime
+    };
+    console.log('inputs', inputs);
+    this.props.getMeasurements(inputs)
+  }
+  render() {
+    const { handleSubmit, pristine, reset, submitting } = this.props
+    return (
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <Field name="startDate" type="date" component={renderField} label="Start Date" />
+        <Field name="startTime" type="time" component={renderField} label="Start Time" />
+        <Field name="endDate" type="date" component={renderField} label="End Date" />
+        <Field name="endTime" type="time" component={renderField} label="End Time" />
+        <div>
+          <button type="submit" disabled={submitting}>Submit</button>
+          <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+        </div>
+      </form>
+    )
+  }
 }
 
-export default reduxForm({
+OverviewInput = reduxForm({
   form: 'overviewInputForm',  // a unique identifier for this form
   validate,                // <--- validation function given to redux-form
   warn                     // <--- warning function given to redux-form
 })(OverviewInput)
+
+const selector = formValueSelector('overviewInputForm')
+
+OverviewInput = connect(
+  state => {
+    const { startDate, startTime, endDate, endTime } = selector(state, 'startDate', 'startTime', 'endDate', 'endTime')
+    return {
+      startDate,
+      startTime,
+      endDate,
+      endTime
+    }
+  },
+  dispatch => ({
+    getMeasurements: (inputs) => dispatch(getMeasurementsThunk(inputs))
+  })
+)(OverviewInput)
+
+export default OverviewInput;
+// export default reduxForm({
+//
+//   },
+//   (state) => ({
+//     formValues: getFormValues('overviewInputForm')(state)
+//   }),
+//   dispatch => ({
+//     getMeasurements: (inputs) => dispatch(getMeasurementsThunk(inputs))
+//   })
+// )(OverviewInput)
