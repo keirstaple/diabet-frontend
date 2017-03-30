@@ -8,12 +8,13 @@ const authorization = process.env.REACT_APP_AUTHORIZATION;
 export const getMeasurements = (inputs = {}) => {
   console.log('inside getMeasurements');
   const { startDate, startTime, endDate, endTime} = inputs;
+  console.log(inputs)
   let url;
   if(startDate === undefined || endDate === undefined) {
     url = `${ROOT_URL}`;
     console.log('api call', url);
   } else {
-    url = `${ROOT_URL_MINI}${startDate}-${startTime}&end=${endDate}-${endTime}`;
+    url = `${ROOT_URL_MINI}${startDate}-${startTime}:00&end=${endDate}-${endTime}:00`;
     console.log('api call', url);
   }
   const init = {
