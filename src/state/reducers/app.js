@@ -17,10 +17,10 @@ export const getMeasurementsSuccess = payload => ({ type: GET_MEASUREMENTS_SUCCE
 export const getMeasurementsFailure = error => ({ type: GET_MEASUREMENTS_FAILURE, error });
 
 //thunks
-export const getMeasurementsThunk = () => dispatch => {
+export const getMeasurementsThunk = (inputs) => dispatch => {
   console.log('getMeasurementsThunk')
   dispatch(getMeasurements());
-  return diabetApi.getMeasurements().then(
+  return diabetApi.getMeasurements(inputs).then(
     data => dispatch(getMeasurementsSuccess(data)),
     err => dispatch(getMeasurementsFailure(err)),
   )

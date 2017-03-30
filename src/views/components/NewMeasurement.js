@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-// import { reduxForm } from 'redux-form';
-// import { createPost } from '../actions/index';
+import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { getMeasurementsThunk, measurementsData, measurementsResults } from './../../state';
-// import { Link } from 'react-router';
+import { Link } from 'react-router';
 
 class NewMeasurement extends Component {
   //context doesn't have to be deliberately passed from parent to child like props
@@ -49,10 +48,10 @@ export default connect(
   })
 )(NewMeasurement);
 
-//same as const handleSubmit = this.props.handleSubmit;
-//same as const title = this.props.fields.title;
-// const { fields: { title, categories, content }, handleSubmit } = this.props;
-
+// // same as const handleSubmit = this.props.handleSubmit;
+// // same as const title = this.props.fields.title;
+// // const { fields: { title, categories, content }, handleSubmit } = this.props;
+//
 // onSubmit(props) {
 //   this.props.createPost(props)
 //     .then(() => {
@@ -62,7 +61,7 @@ export default connect(
 //       this.context.router.push('/');
 //     });
 // }
-
+//
 // function validate(values) {
 //   const errors = {};
 //
@@ -78,16 +77,16 @@ export default connect(
 //
 //   return errors;
 // }
-
-// connect: first argument is mapStateToProps, 2nd is mapDispatchToProps
-// reduxForm: 1st is form config, 2nd is mapStateToProps, 3rd is mapDispatchToProps
+//
+// // connect: first argument is mapStateToProps, 2nd is mapDispatchToProps
+// // reduxForm: 1st is form config, 2nd is mapStateToProps, 3rd is mapDispatchToProps
 // export default reduxForm({
 //   form: 'PostsNewForm',
 //   fields: ['title', 'categories', 'content'],
 //   validate
 // }, null, { createPost })(NewMeasurement);
-
-
+//
+//
 // <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 //     {/*Handing responsibility of form submission over to redux-form with this handler handleSubmit, which will call our action creator*/}
 //   <h3>Create A New Post</h3>
