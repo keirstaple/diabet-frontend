@@ -9,7 +9,7 @@ class OverviewChart extends Component {
   renderChart() {
     const data = this.props.measurements;
     console.log('data', data)
-    if(Object.prototype.toString.call(data) === '[object Array]' ) {
+    if(Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
       return(
         <div>
           <LineChart width={730} height={250} data={data}
@@ -22,6 +22,10 @@ class OverviewChart extends Component {
             <Line type="monotone" dataKey="value" stroke="#8884d8" />
           </LineChart>
         </div>
+      )
+    } else if(Object.prototype.toString.call(data) === '[object Array]' && data.length === 0) {
+      return(
+        <h5>Sorry, our records don't show any data for this range. Please select a new start and/or end point.</h5>
       )
     } else {
       return(
