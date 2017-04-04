@@ -12,10 +12,10 @@ const validate = values => {
     errors.startTime = '*Required'
   }
   if (!values.endDate) {
-    errors.age = '*Required'
+    errors.endDate = '*Required'
   }
   if (!values.endTime) {
-    errors.age = '*Required'
+    errors.endTime = '*Required'
   }
   return errors
 }
