@@ -12,10 +12,10 @@ const validate = values => {
     errors.startTime = '*Required'
   }
   if (!values.endDate) {
-    errors.age = '*Required'
+    errors.endDate = '*Required'
   }
   if (!values.endTime) {
-    errors.age = '*Required'
+    errors.endTime = '*Required'
   }
   return errors
 }
@@ -23,6 +23,10 @@ const validate = values => {
 const warn = values => {
   const warnings = {}
   //write some if statement about if the dates or times are larger than the current date/time
+  if(new Date(values.startDate) > new Date(values.endDate)) {
+    warnings.startDate = '*This date is after the end date';
+    warnings.endDate = '*This date is before the start date';
+  }
   return warnings
 }
 
@@ -90,13 +94,3 @@ OverviewInput = connect(
 )(OverviewInput)
 
 export default OverviewInput;
-// export default reduxForm({
-//
-//   },
-//   (state) => ({
-//     formValues: getFormValues('overviewInputForm')(state)
-//   }),
-//   dispatch => ({
-//     getMeasurements: (inputs) => dispatch(getMeasurementsThunk(inputs))
-//   })
-// )(OverviewInput)

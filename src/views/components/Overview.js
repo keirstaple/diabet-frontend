@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { NavBar, OverviewInput } from '../';
+import { NavBar, OverviewInput, OverviewChart } from '../';
 import { getMeasurementsThunk, measurementsResults } from './../../state';
 
 class Overview extends Component {
@@ -36,6 +36,7 @@ class Overview extends Component {
           { this.renderMeasurements() }
         </ul>
         <OverviewInput />
+        <OverviewChart />
       </div>
     );
   }
