@@ -19,7 +19,12 @@ export const locationBeforeTransitions = createSelector(
   ({ locationBeforeTransitions }) => locationBeforeTransitions
 );
 
-export const overviewInputFormValues = createSelector(
-  formState,
-  ({ overviewInputForm }) => overviewInputForm.values
-);
+// export const overviewInputFormValues = createSelector(
+//   formState,
+//   ({ overviewInputForm }) => overviewInputForm.values
+// );
+
+export const postResponse = createSelector(
+  appState,
+  ({ postResponse }) => postResponse
+)
