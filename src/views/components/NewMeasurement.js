@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, formValueSelector, reset } from 'redux-form';
 import { connect } from 'react-redux';
 import { postMeasurementThunk, postResponseStatus } from './../../state';
 // import { Link } from 'react-router';
@@ -64,7 +64,6 @@ const renderField = ({ element, input, label, type, children, meta: { touched, e
 
 class NewMeasurement extends Component {
   onSubmit() {
-    // console.log('props', this.props.formValues)
     const { value, category, type, record_datetime, notes } = this.props;
     const inputs = {
       value: parseInt(value),
@@ -74,26 +73,29 @@ class NewMeasurement extends Component {
       notes,
       user: 2
     };
-    console.log('inputs', inputs)
-    this.props.postMeasurement(inputs)
+
+    this.props.postMeasurement(inputs).then(() => {
+      this.props.resetForm()
+    })
+  }
+
+  responseApproved () {
+    if(this.props.postResponse === undefined) {
+      return
+    } else if(this.props.postResponse === 201) {
+      return (
+        <span style={{ background: '#5CB85C', height: '20px', padding: '5px', color: 'white', margin: '25px 0 0 0'}}>Created measurement successfully!</span>
+      )
+    } else {
+      return(
+        <span style={{ background: '#D90900', height: '20px', padding: '5px', color: 'white', margin: '25px 0 0 0'}}>Uh oh! Something went wrong, please try again.</span>
+      )
+    }
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting, postResponse } = this.props;
-    console.log('props', this.props)
-    console.log('postResponse', postResponse)
-    let responseApproved = () => {
-      console.log('inside', postResponse)
+    const { handleSubmit, pristine, reset, submitting } = this.props;
 
-      if(postResponse === 201) {
-        reset()
-        return (
-          <span>Created measurement successfully</span>
-        )
-      } else {
-        return;
-      }
-    };
     return (
       <div>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -124,7 +126,8 @@ class NewMeasurement extends Component {
             <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
           </div>
         </form>
-          {responseApproved()}
+
+        {this.responseApproved()}
       </div>
     )
   }
@@ -152,6 +155,7 @@ NewMeasurement = connect(
     }
   },
   dispatch => ({
+    resetForm: () => dispatch(reset('newMeasurementForm')),
     postMeasurement: (inputs) => dispatch(postMeasurementThunk(inputs))
   })
 )(NewMeasurement)
