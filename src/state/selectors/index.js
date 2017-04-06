@@ -4,13 +4,23 @@ export const appState = state =>  state.app;
 export const routeState = state => state.routing;
 export const formState = state => state.form;
 
-export const measurementsData = createSelector(
+export const measurementsRangeData = createSelector(
   appState,
-  ({ measurements }) => measurements
+  ({ measurementsRange }) => measurementsRange
 );
 
-export const measurementsResults = createSelector(
-  measurementsData,
+export const measurementsRangeResults = createSelector(
+  measurementsRangeData,
+  ({ results }) => results
+);
+
+export const measurementsPastDayData = createSelector(
+  appState,
+  ({ measurementsPastDay }) => measurementsPastDay
+);
+
+export const measurementsPastDayResults = createSelector(
+  measurementsPastDayData,
   ({ results }) => results
 );
 

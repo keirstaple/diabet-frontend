@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Line } from 'recharts';
 
 import { NavBar, OverviewInput, OverviewChart, OverviewTable } from '../';
 import { getMeasurementsThunk, measurementsResults } from './../../state';
@@ -17,22 +18,37 @@ class Overview extends Component {
     this.props.getMeasurements();
   }
 
-  // renderMeasurements() {
-  //   console.log('props: ', this.props);
-  //   if(this.props.measurements) {
-  //     return this.props.measurements.map((datum, idx) => {
-  //       return (
-  //         <li className="list-group-item" key={idx}>{datum.notes}</li>
-  //       );
-  //     });
-  //   }
-  // }
+  renderLastTwentyFour() {
+    let data;
+    if(this.props.lastTwentyFour){
+      data = this.props.lastTwentyFour.reverse();
+    };
+    console.log('data', data)
+    if(Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
+      return(
+        <div>
+          <h3>Readings for past 24 hours</h3>
+          <LineChart width={500} height={150} data={data}
+            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+            <XAxis dataKey="record_datetime" />
+            <YAxis dataKey="value" />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="value" stroke="#8884d8" />
+          </LineChart>
+        </div>
+      )
+    }
+  }
 
   render() {
     return (
       <div id="overview">
         <NavBar />
-
+        <ul className="list-group">
+          { this.renderLastTwentyFour() }
+        </ul>
         <OverviewInput />
         <OverviewChart />
         <OverviewTable />
@@ -43,9 +59,9 @@ class Overview extends Component {
 
 export default connect(
   (state) => ({
-    measurements: measurementsResults(state)
+    measurementsRange: measurementsRangeResults(state)
   }),
   dispatch => ({
-    getMeasurements: () => dispatch(getMeasurementsThunk())
+    getMeasurementsRange: () => dispatch(getMeasurementsRangeThunk())
   })
 )(Overview);
