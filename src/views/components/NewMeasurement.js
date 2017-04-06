@@ -70,7 +70,7 @@ class NewMeasurement extends Component {
       value: parseInt(value),
       category: parseInt(category),
       type: parseInt(type),
-      record_datetime,
+      record_datetime: record_datetime + ':00Z',
       notes,
       user: 2
     };
