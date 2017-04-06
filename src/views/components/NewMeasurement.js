@@ -67,9 +67,9 @@ class NewMeasurement extends Component {
     // console.log('props', this.props.formValues)
     const { value, category, type, record_datetime, notes } = this.props;
     const inputs = {
-      value,
-      category,
-      type,
+      value: parseInt(value),
+      category: parseInt(category),
+      type: parseInt(type),
       record_datetime,
       notes,
       user: 2
