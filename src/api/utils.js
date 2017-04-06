@@ -9,3 +9,13 @@ export const promiseToGet = (url, init) => axios.get(url, init)
     console.log(error);
     return error;
   });
+
+export const promiseToPost = (url, data, init) => axios.post(url, data, init)
+  .then(function (response) {
+    console.log('response', response);
+    return response
+  })
+  .catch(function (error) {
+    console.log(error);
+    return error;
+  });

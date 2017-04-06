@@ -1,4 +1,4 @@
-import {promiseToGet} from './utils';
+import { promiseToGet, promiseToPost } from './utils';
 require('dotenv').config()
 
 const ROOT_URL = 'https://www.diabet.io/api/glucose/';
@@ -20,7 +20,6 @@ export const getMeasurements = (inputs = {}) => {
   const init = {
     "async": true,
     "crossDomain": true,
-    "url": "https://www.diabet.io/api/glucose/",
     "headers": {
       "content-type": "application/json",
       "authorization": `Basic ${authorization}`,
@@ -31,6 +30,25 @@ export const getMeasurements = (inputs = {}) => {
   return promiseToGet(url, init);
 }
 
+export const postMeasurement = (inputs = {}) => {
+  // const { measurement, time, date } = inputs;
+  const url = `${ROOT_URL}`;
+  console.log('inputs', inputs)
+  const data = { ...inputs }
+  const init = {
+    "async": true,
+    "crossDomain": true,
+    "headers": {
+      "content-type": "application/json",
+      "authorization": `Basic ${authorization}`,
+      "cache-control": "no-cache"
+    },
+  };
+
+  return promiseToPost(url, data, init);
+}
+
 export const diabetApi = {
-  getMeasurements
+  getMeasurements,
+  postMeasurement
 }
