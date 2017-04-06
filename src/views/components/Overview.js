@@ -17,24 +17,22 @@ class Overview extends Component {
     this.props.getMeasurements();
   }
 
-  renderMeasurements() {
-    console.log('props: ', this.props);
-    if(this.props.measurements) {
-      return this.props.measurements.map((datum, idx) => {
-        return (
-          <li className="list-group-item" key={idx}>{datum.notes}</li>
-        );
-      });
-    }
-  }
+  // renderMeasurements() {
+  //   console.log('props: ', this.props);
+  //   if(this.props.measurements) {
+  //     return this.props.measurements.map((datum, idx) => {
+  //       return (
+  //         <li className="list-group-item" key={idx}>{datum.notes}</li>
+  //       );
+  //     });
+  //   }
+  // }
 
   render() {
     return (
       <div id="overview">
         <NavBar />
-        <ul className="list-group">
-          { this.renderMeasurements() }
-        </ul>
+
         <OverviewInput />
         <OverviewChart />
         <OverviewTable />
