@@ -1,5 +1,5 @@
 import { getMeasurementsThunk, initializeApp, postMeasurementThunk } from './reducers/app';
-import { measurementsData, measurementsResults, overviewInputFormValues, postResponse } from './selectors';
+import { measurementsData, measurementsResults, overviewInputFormValues, postResponseStatus } from './selectors';
 
 export {
   getMeasurementsThunk,
@@ -8,5 +8,5 @@ export {
   measurementsResults,
   overviewInputFormValues,
   postMeasurementThunk,
-  postResponse
+  postResponseStatus
 };

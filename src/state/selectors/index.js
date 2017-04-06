@@ -28,3 +28,8 @@ export const postResponse = createSelector(
   appState,
   ({ postResponse }) => postResponse
 )
+
+export const postResponseStatus = createSelector(
+  postResponse,
+  ({ status }) => status
+)

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
-import { postMeasurementThunk, postResponse } from './../../state';
+import { postMeasurementThunk, postResponseStatus } from './../../state';
 // import { Link } from 'react-router';
 
 const validate = values => {
@@ -77,37 +77,55 @@ class NewMeasurement extends Component {
     console.log('inputs', inputs)
     this.props.postMeasurement(inputs)
   }
-  render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props
-    return (
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <Field element="input" name="value" type="number" component={renderField} label="Glucose Value" />
-        <Field element="select" name="category" component={renderField} label="Category" >
-          <option></option>
-          <option value="1">Breakfast</option>
-          <option value="2">Lunch</option>
-          <option value="3">Dinner</option>
-          <option value="4">Snack</option>
-          <option value="5">Bedtime</option>
-          <option value="6">Before Exercise</option>
-          <option value="7">After Exercise</option>
-          <option value="8">No Category</option>
-        </Field>
-        <Field element="select" name="type" component={renderField} label="Type of Reading" >
-          <option></option>
-          <option value="0">Sensor Reading</option>
-          <option value="1">Meter Reading</option>
-          <option value="2">Hourly Average</option>
-          <option value="3">Daily Average</option>
-        </Field>
-        <Field element="input" name="record_datetime" type="datetime-local" component={renderField} label="Date and Time of the Reading" />
-        <Field element="input" name="notes" type="textarea" component={renderField} label="Notes" />
 
-        <div>
-          <button type="submit" disabled={submitting}>Submit</button>
-          <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-        </div>
-      </form>
+  render() {
+    const { handleSubmit, pristine, reset, submitting, postResponse } = this.props;
+    console.log('props', this.props)
+    console.log('postResponse', postResponse)
+    let responseApproved = () => {
+      console.log('inside', postResponse)
+
+      if(postResponse === 201) {
+        reset()
+        return (
+          <span>Created measurement successfully</span>
+        )
+      } else {
+        return;
+      }
+    };
+    return (
+      <div>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <Field element="input" name="value" type="number" component={renderField} label="Glucose Value" />
+          <Field element="select" name="category" component={renderField} label="Category" >
+            <option></option>
+            <option value="1">Breakfast</option>
+            <option value="2">Lunch</option>
+            <option value="3">Dinner</option>
+            <option value="4">Snack</option>
+            <option value="5">Bedtime</option>
+            <option value="6">Before Exercise</option>
+            <option value="7">After Exercise</option>
+            <option value="8">No Category</option>
+          </Field>
+          <Field element="select" name="type" component={renderField} label="Type of Reading" >
+            <option></option>
+            <option value="0">Sensor Reading</option>
+            <option value="1">Meter Reading</option>
+            <option value="2">Hourly Average</option>
+            <option value="3">Daily Average</option>
+          </Field>
+          <Field element="input" name="record_datetime" type="datetime-local" component={renderField} label="Date and Time of the Reading" />
+          <Field element="input" name="notes" type="textarea" component={renderField} label="Notes" />
+
+          <div>
+            <button type="submit" disabled={submitting}>Submit</button>
+            <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+          </div>
+        </form>
+          {responseApproved()}
+      </div>
     )
   }
 }
@@ -123,14 +141,14 @@ const selector = formValueSelector('newMeasurementForm')
 NewMeasurement = connect(
   state => {
     const { value, category, type, record_datetime, notes } = selector(state, 'value', 'category', 'type', 'record_datetime', 'notes')
-    // const { postResponse } = postResponse(state)
+    const postResponse = postResponseStatus(state)
     return {
       value,
       category,
       type,
       record_datetime,
-      notes
-      // postResponse
+      notes,
+      postResponse
     }
   },
   dispatch => ({
