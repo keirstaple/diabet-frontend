@@ -10,7 +10,7 @@ export const promiseToGet = (url, init) => axios.get(url, init)
     return error;
   });
 
-export const promiseToPost = (url, init, inputs) => axios.post(url, init, inputs)
+export const promiseToPost = (url, data, init) => axios.post(url, data, init)
   .then(function (response) {
     console.log('response', response);
     return response

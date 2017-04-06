@@ -34,6 +34,7 @@ export const postMeasurement = (inputs = {}) => {
   // const { measurement, time, date } = inputs;
   const url = `${ROOT_URL}`;
   console.log('inputs', inputs)
+  const data = { ...inputs }
   const init = {
     "async": true,
     "crossDomain": true,
@@ -44,7 +45,7 @@ export const postMeasurement = (inputs = {}) => {
     },
   };
 
-  return promiseToPost(url, init, inputs);
+  return promiseToPost(url, data, init);
 }
 
 export const diabetApi = {
