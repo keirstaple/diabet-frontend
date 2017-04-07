@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Line } from 'recharts';
 
 import { NavBar, OverviewInput, OverviewChart, OverviewTable } from '../';
-import { getMeasurementsThunk, measurementsResults } from './../../state';
+import { getMeasurementsPastDayThunk, measurementsPastDayResults } from './../../state';
 
 class Overview extends Component {
   //context doesn't have to be deliberately passed from parent to child like props
@@ -15,13 +15,13 @@ class Overview extends Component {
 
   componentWillMount() {
     //grabs posts when component loads
-    this.props.getMeasurements();
+    this.props.getMeasurementsPastDay();
   }
 
-  renderLastTwentyFour() {
+  renderPastDay() {
     let data;
-    if(this.props.lastTwentyFour){
-      data = this.props.lastTwentyFour.reverse();
+    if(this.props.measurementsPastDay){
+      data = this.props.measurementsPastDay.reverse();
     };
     console.log('data', data)
     if(Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
@@ -47,7 +47,7 @@ class Overview extends Component {
       <div id="overview">
         <NavBar />
         <ul className="list-group">
-          { this.renderLastTwentyFour() }
+          { this.renderPastDay() }
         </ul>
         <OverviewInput />
         <OverviewChart />
@@ -59,9 +59,9 @@ class Overview extends Component {
 
 export default connect(
   (state) => ({
-    measurementsRange: measurementsRangeResults(state)
+    measurementsPastDay: measurementsPastDayResults(state)
   }),
   dispatch => ({
-    getMeasurementsRange: () => dispatch(getMeasurementsRangeThunk())
+    getMeasurementsPastDay: () => dispatch(getMeasurementsPastDayThunk())
   })
 )(Overview);

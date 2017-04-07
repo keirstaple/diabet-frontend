@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Line } from 'recharts';
 import { connect } from 'react-redux';
 
-import { measurementsData } from './../../state';
+import { measurementsRangeData } from './../../state';
 
 class OverviewChart extends Component {
 
   renderChart() {
-    const data = this.props.measurements;
+    const data = this.props.measurementsRange;
     console.log('data', data)
     if(Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
       return(
@@ -46,7 +46,7 @@ class OverviewChart extends Component {
 
 export default connect(
   (state) => ({
-    measurements: measurementsData(state)
+    measurementsRange: measurementsRangeData(state)
   }),
   null
 )(OverviewChart);

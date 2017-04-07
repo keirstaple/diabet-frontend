@@ -1,3 +1,4 @@
+//imports
 import {
   getMeasurementsRangeThunk,
   getMeasurementsPastDayThunk,
@@ -14,6 +15,7 @@ import {
   postResponseStatus
 } from './selectors';
 
+//exports
 export {
   getMeasurementsRangeThunk,
   getMeasurementsPastDayThunk,
