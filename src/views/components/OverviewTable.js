@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import { measurementsData } from './../../state';
+import { measurementsRangeData } from './../../state';
 
 class OverviewTable extends Component {
 
   renderTable() {
-    const data = this.props.measurements;
+    const data = this.props.measurementsRange;
     console.log('data', data)
     if(Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
       return(
@@ -51,7 +51,7 @@ class OverviewTable extends Component {
 
 export default connect(
   (state) => ({
-    measurements: measurementsData(state)
+    measurementsRange: measurementsRangeData(state)
   }),
   null
 )(OverviewTable);

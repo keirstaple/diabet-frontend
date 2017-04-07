@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Line } from 'recharts';
 
 import { NavBar, OverviewInput, OverviewChart, OverviewTable } from '../';
-import { getMeasurementsThunk, measurementsResults } from './../../state';
+import { getMeasurementsPastDayThunk, measurementsPastDayResults } from './../../state';
 
 class Overview extends Component {
   //context doesn't have to be deliberately passed from parent to child like props
@@ -14,17 +15,30 @@ class Overview extends Component {
 
   componentWillMount() {
     //grabs posts when component loads
-    this.props.getMeasurements();
+    this.props.getMeasurementsPastDay();
   }
 
-  renderMeasurements() {
-    console.log('props: ', this.props);
-    if(this.props.measurements) {
-      return this.props.measurements.map((datum, idx) => {
-        return (
-          <li className="list-group-item" key={idx}>{datum.notes}</li>
-        );
-      });
+  renderPastDay() {
+    let data;
+    if(this.props.measurementsPastDay){
+      data = this.props.measurementsPastDay.reverse();
+    };
+    console.log('data', data)
+    if(Object.prototype.toString.call(data) === '[object Array]' && data.length > 0) {
+      return(
+        <div>
+          <h3>Readings for past 24 hours</h3>
+          <LineChart width={500} height={150} data={data}
+            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+            <XAxis dataKey="record_datetime" />
+            <YAxis dataKey="value" />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="value" stroke="#8884d8" />
+          </LineChart>
+        </div>
+      )
     }
   }
 
@@ -33,7 +47,7 @@ class Overview extends Component {
       <div id="overview">
         <NavBar />
         <ul className="list-group">
-          { this.renderMeasurements() }
+          { this.renderPastDay() }
         </ul>
         <OverviewInput />
         <OverviewChart />
@@ -45,9 +59,9 @@ class Overview extends Component {
 
 export default connect(
   (state) => ({
-    measurements: measurementsResults(state)
+    measurementsPastDay: measurementsPastDayResults(state)
   }),
   dispatch => ({
-    getMeasurements: () => dispatch(getMeasurementsThunk())
+    getMeasurementsPastDay: () => dispatch(getMeasurementsPastDayThunk())
   })
 )(Overview);

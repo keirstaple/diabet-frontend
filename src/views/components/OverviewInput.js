@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { getMeasurementsThunk } from './../../state';
+import { getMeasurementsRangeThunk } from './../../state';
 
 const validate = values => {
   const errors = {}
@@ -51,7 +51,7 @@ class OverviewInput extends Component {
       endTime
     };
     console.log('inputs', inputs);
-    this.props.getMeasurements(inputs)
+    this.props.getMeasurementsRange(inputs)
   }
   render() {
     const { handleSubmit, pristine, reset, submitting } = this.props
@@ -89,7 +89,7 @@ OverviewInput = connect(
     }
   },
   dispatch => ({
-    getMeasurements: (inputs) => dispatch(getMeasurementsThunk(inputs))
+    getMeasurementsRange: (inputs) => dispatch(getMeasurementsRangeThunk(inputs))
   })
 )(OverviewInput)
 

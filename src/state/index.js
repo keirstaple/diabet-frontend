@@ -1,11 +1,29 @@
-import { getMeasurementsThunk, initializeApp, postMeasurementThunk } from './reducers/app';
-import { measurementsData, measurementsResults, overviewInputFormValues, postResponseStatus } from './selectors';
-
-export {
-  getMeasurementsThunk,
+//imports
+import {
+  getMeasurementsRangeThunk,
+  getMeasurementsPastDayThunk,
   initializeApp,
-  measurementsData,
-  measurementsResults,
+  postMeasurementThunk
+} from './reducers/app';
+
+import {
+  measurementsRangeData,
+  measurementsRangeResults,
+  measurementsPastDayData,
+  measurementsPastDayResults,
+  overviewInputFormValues,
+  postResponseStatus
+} from './selectors';
+
+//exports
+export {
+  getMeasurementsRangeThunk,
+  getMeasurementsPastDayThunk,
+  initializeApp,
+  measurementsRangeData,
+  measurementsRangeResults,
+  measurementsPastDayData,
+  measurementsPastDayResults,
   overviewInputFormValues,
   postMeasurementThunk,
   postResponseStatus
