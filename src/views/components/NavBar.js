@@ -1,14 +1,19 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 
+const linkStyle = {
+  textDecoration: 'none',
+  marginLeft: '10px'
+}
+
 class NavBar extends Component {
   renderLinks() {
     let title = "Diabet.io";
     return(
       <div style={{display: 'flex', width: '100vw'}}>
         <h3>{title}</h3>
-        <h3><Link to={'/'} style={{textDecoration: 'none', marginLeft: '10px'}}>New Measurement</Link></h3>
-        <h3><Link to={'/overview'} style={{textDecoration: 'none', marginLeft: '10px'}}>Overview</Link></h3>
+        <h3><Link to={'/'} style={linkStyle}>New Measurement</Link></h3>
+        <h3><Link to={'/overview'} style={linkStyle}>Overview</Link></h3>
       </div>
     );
   }
