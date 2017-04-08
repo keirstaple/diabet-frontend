@@ -3,20 +3,20 @@ import { Link } from 'react-router';
 
 class NavBar extends Component {
   renderLinks() {
+    let title = "Diabet.io";
     return(
-      <div>
-        <h2><Link to={'/'}>New Measurement</Link></h2>
-        <h2><Link to={'/overview'}>Overview</Link></h2>
+      <div style={{display: 'flex', width: '100vw'}}>
+        <h3>{title}</h3>
+        <h3><Link to={'/'} style={{textDecoration: 'none', marginLeft: '10px'}}>New Measurement</Link></h3>
+        <h3><Link to={'/overview'} style={{textDecoration: 'none', marginLeft: '10px'}}>Overview</Link></h3>
       </div>
     );
   }
 
   render() {
-    let title = "Diabet.io";
     return (
       <div>
         <div>
-          <h2>{title}</h2>
           <div className="links-list">
             { this.renderLinks() }
           </div>
